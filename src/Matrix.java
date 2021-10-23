@@ -149,6 +149,27 @@ public class Matrix {
         }
     }
 
+    public void search(int value) {
+        int counter = 0;
+        for (int i = 0; i < rowMatrix.length; i++) {
+            if(rowMatrix[i] != null){
+                Node n = rowMatrix[i];
+                while(n != null){
+                    if(n.data == value){
+                        System.out.println("Value: " + value + "  Found in: (" + n.rowIndex + "," + n.columnIndex + ")");
+                        counter++;
+                    }
+                    n = n.nextInRow;
+                }
+            }
+        }
+        if(counter == 0){
+            System.out.println("The Value You Entered Wasn't Found!");
+        }else {
+            System.out.println("The Value You Entered Was Found " + counter + " time(s)!");
+        }
+    }
+
     public Boolean exist(int row, int col) {
         if (rowMatrix[row] == null) {
             return false;

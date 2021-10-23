@@ -61,7 +61,13 @@ public class Main {
                         System.out.println("There's No Value To Be Deleted!");
                     }
                 } else if (input == 2) {
-
+                    System.out.println("Enter Value To Look For:");
+                    int x = sc.nextInt();
+                    if(x == 0){
+                        System.out.println("Bro! This Matrix Is Full Of 0s!!!");
+                    }else {
+                        matrix.search(x);
+                    }
                 } else if (input == 3) {
 
                 } else if (input == 4) {
