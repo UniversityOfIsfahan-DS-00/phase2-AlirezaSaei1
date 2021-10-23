@@ -18,9 +18,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         while (!exit) {
             while (true) {
-                System.out.println("Please Enter Your Path (Format: M(rows, columns).csv): \n(Type \"Exit\" To Quit Program)");
+                System.out.println("Please Enter Your Path (Format: M(rows,columns).csv): \n(Type \"0\" To Quit Program)");
                 String x = sc.nextLine();
-                if (x.equals("Exit")) {
+                if (x.equals("0")) {
                     exit = true;
                     break;
                 }
@@ -53,7 +53,13 @@ public class Main {
                         }
                     }
                 } else if (input == 1) {
-
+                    System.out.println("Enter Row, Column:");
+                    int row = sc.nextInt(), column = sc.nextInt();
+                    if(matrix.exist(row, column)) {
+                        matrix.delete(row, column);
+                    }else{
+                        System.out.println("There's No Value To Be Deleted!");
+                    }
                 } else if (input == 2) {
 
                 } else if (input == 3) {
@@ -106,6 +112,5 @@ public class Main {
             return false;
         }
     }
-
 }
 

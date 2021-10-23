@@ -88,7 +88,7 @@ public class Matrix {
                 temp = temp.nextInRow;
                 n.nextInRow = node;
                 node.nextInRow = temp;
-            }else{
+            } else {
                 rowMatrix[row] = node;
                 rowMatrix[row].nextInRow = n;
             }
@@ -98,7 +98,7 @@ public class Matrix {
             columnMatrix[col] = node;
         } else {
             Node n = columnMatrix[col];
-            if(n.rowIndex < row) {
+            if (n.rowIndex < row) {
                 while (n.nextInColumn != null) {
                     if (n.nextInColumn.rowIndex > row) {
                         break;
@@ -110,10 +110,42 @@ public class Matrix {
                 temp = temp.nextInColumn;
                 n.nextInColumn = node;
                 node.nextInColumn = temp;
-            }else {
+            } else {
                 columnMatrix[col] = node;
                 columnMatrix[col].nextInColumn = n;
             }
+        }
+    }
+
+    public void delete(int row, int col) {
+        Node r = rowMatrix[row];
+        Node c = columnMatrix[col];
+
+        Node temp = null;
+        if (r.columnIndex == col) {
+            rowMatrix[row] = r.nextInRow;
+        } else {
+            while (r.nextInRow != null) {
+                if (r.nextInRow.columnIndex == col) {
+                    temp = r.nextInRow.nextInRow;
+                    break;
+                }
+                r = r.nextInRow;
+            }
+            r.nextInRow = temp;
+        }
+
+        if (c.rowIndex == row) {
+            columnMatrix[col] = c.nextInColumn;
+        } else {
+            while (c.nextInColumn != null) {
+                if (c.nextInColumn.rowIndex == row) {
+                    temp = c.nextInColumn.nextInColumn;
+                    break;
+                }
+                c = c.nextInColumn;
+            }
+            c.nextInColumn = temp;
         }
     }
 

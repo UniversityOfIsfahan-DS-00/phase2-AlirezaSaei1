@@ -4,7 +4,7 @@ public class Node {
     int rowIndex, columnIndex;
     int data;
 
-    Node(int rowIndex, int columnIndex, int data) {
+    public Node(int rowIndex, int columnIndex, int data) {
         this.data = data;
         this.rowIndex = rowIndex;
         this.columnIndex = columnIndex;
