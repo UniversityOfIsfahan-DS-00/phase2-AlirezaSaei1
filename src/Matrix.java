@@ -151,11 +151,11 @@ public class Matrix {
 
     public void search(int value) {
         int counter = 0;
-        for (int i = 0; i < rowMatrix.length; i++) {
-            if(rowMatrix[i] != null){
-                Node n = rowMatrix[i];
-                while(n != null){
-                    if(n.data == value){
+        for (Node matrix : rowMatrix) {
+            if (matrix != null) {
+                Node n = matrix;
+                while (n != null) {
+                    if (n.data == value) {
                         System.out.println("Value: " + value + "  Found in: (" + n.rowIndex + "," + n.columnIndex + ")");
                         counter++;
                     }
@@ -163,10 +163,26 @@ public class Matrix {
                 }
             }
         }
-        if(counter == 0){
+        if (counter == 0) {
             System.out.println("The Value You Entered Wasn't Found!");
-        }else {
+        } else {
             System.out.println("The Value You Entered Was Found " + counter + " time(s)!");
+        }
+    }
+
+    public void update(int row, int col, int value) {
+        for (Node matrix : rowMatrix) {
+            if (matrix != null) {
+                Node n = matrix;
+                while (n != null) {
+                    if (n.rowIndex == row && n.columnIndex == col) {
+                        n.data = value;
+                        System.out.println("Value Updated Successfully!");
+                        break;
+                    }
+                    n = n.nextInRow;
+                }
+            }
         }
     }
 

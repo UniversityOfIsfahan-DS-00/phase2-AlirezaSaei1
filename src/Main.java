@@ -38,9 +38,9 @@ public class Main {
                 if (input == 0) {
                     System.out.println("Enter Row, Column, Value :");
                     int row = sc.nextInt(), column = sc.nextInt(), value = sc.nextInt();
-                    if(value == 0){
+                    if (value == 0) {
                         System.out.println("Do You Want To Insert 0 To Sparse Matrix?!");
-                    }else {
+                    } else {
                         try {
                             if (!matrix.exist(row, column)) {
                                 matrix.insert(row, column, value);
@@ -55,21 +55,28 @@ public class Main {
                 } else if (input == 1) {
                     System.out.println("Enter Row, Column:");
                     int row = sc.nextInt(), column = sc.nextInt();
-                    if(matrix.exist(row, column)) {
+                    if (matrix.exist(row, column)) {
                         matrix.delete(row, column);
-                    }else{
+                        System.out.println("Value Deleted Successfully!");
+                    } else {
                         System.out.println("There's No Value To Be Deleted!");
                     }
                 } else if (input == 2) {
                     System.out.println("Enter Value To Look For:");
                     int x = sc.nextInt();
-                    if(x == 0){
+                    if (x == 0) {
                         System.out.println("Bro! This Matrix Is Full Of 0s!!!");
-                    }else {
+                    } else {
                         matrix.search(x);
                     }
                 } else if (input == 3) {
-
+                    System.out.println("Enter Row, Column, Value :");
+                    int row = sc.nextInt(), column = sc.nextInt(), value = sc.nextInt();
+                    if (matrix.exist(row, column)) {
+                        matrix.update(row, column, value);
+                    } else {
+                        System.out.println("The Value On (" + row + ", " + column + ") is 0!");
+                    }
                 } else if (input == 4) {
                     matrix.print2D();
                 } else if (input == 5) {
