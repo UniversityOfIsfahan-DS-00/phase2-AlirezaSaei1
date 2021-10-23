@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class Main {
     static int rows;
     static int columns;
+    static Matrix matrix;
 
     static Boolean exit = false;
     static Boolean read = false;
@@ -29,11 +30,43 @@ public class Main {
                     break;
                 }
             }
-            while(read){
+            while (read) {
                 System.out.println("Main Menu");
                 System.out.println("0: Insert\n1: Delete\n2: Search\n3: Update\n4: Print\n5: Back");
                 System.out.println("Your Input: ");
                 int input = sc.nextInt();
+                if (input == 0) {
+                    System.out.println("Enter Row, Column, Value :");
+                    int row = sc.nextInt(), column = sc.nextInt(), value = sc.nextInt();
+                    if(value == 0){
+                        System.out.println("Do You Want To Insert 0 To Sparse Matrix?!");
+                    }else {
+                        try {
+                            if (!matrix.exist(row, column)) {
+                                matrix.insert(row, column, value);
+                                System.out.println("Value Successfully Inserted!");
+                            } else {
+                                System.out.println("Location Already Has A Value!");
+                            }
+                        } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                } else if (input == 1) {
+
+                } else if (input == 2) {
+
+                } else if (input == 3) {
+
+                } else if (input == 4) {
+                    matrix.print2D();
+                } else if (input == 5) {
+                    read = false;
+                    sc.nextLine();
+                    break;
+                } else {
+                    System.out.println("Please Enter A Valid Number");
+                }
             }
         }
     }
@@ -49,21 +82,18 @@ public class Main {
             rows = size.get(size.size() - 2);
             columns = size.get(size.size() - 1);
 
-            System.out.println("rows:" + rows + "   columns:" + columns);
+            matrix = new Matrix(rows, columns);
 
-            int[][] matrix = new int[rows][columns];
             try (BufferedReader br = new BufferedReader(new FileReader(input))) {
                 String line;
                 int counter = 0;
                 while ((line = br.readLine()) != null) {
                     String[] lineItems = line.split(",");
                     for (int i = 0; i < columns; i++) {
-                        matrix[counter][i] = Integer.parseInt(lineItems[i]);
-
-                        //prints while reading from file
-                        System.out.print(lineItems[i] + ",");
+                        if (!lineItems[i].equals("0")) {
+                            matrix.add(new Node(counter, i, Integer.parseInt(lineItems[i])));
+                        }
                     }
-                    System.out.println();
                     counter++;
                 }
             } catch (Exception e) {
