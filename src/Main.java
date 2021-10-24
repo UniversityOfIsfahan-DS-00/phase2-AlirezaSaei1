@@ -32,7 +32,7 @@ public class Main {
             }
             while (read) {
                 System.out.println("Main Menu");
-                System.out.println("0: Insert\n1: Delete\n2: Search\n3: Update\n4: Print\n5: Back");
+                System.out.println("0: Insert\n1: Delete\n2: Search\n3: Update\n4: Print\n5: Save\n6: Back");
                 System.out.println("Your Input: ");
                 int input = sc.nextInt();
                 if (input == 0) {
@@ -78,12 +78,21 @@ public class Main {
                         System.out.println("The Value On (" + row + ", " + column + ") is 0!");
                     }
                 } else if (input == 4) {
-                    matrix.print2D();
+                    System.out.println("Print Option:\n1: Print 2D\n2: Print Compressed\n3: Back");
+                    int x = sc.nextInt();
+                    if(x == 1){
+                        matrix.print2D();
+                    }
+                    if(x == 2){
+                        matrix.printCompressed();
+                    }
                 } else if (input == 5) {
+                    //save file
+                } else if(input == 6){
                     read = false;
                     sc.nextLine();
                     break;
-                } else {
+                }else{
                     System.out.println("Please Enter A Valid Number");
                 }
             }

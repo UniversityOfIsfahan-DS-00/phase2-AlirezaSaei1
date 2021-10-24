@@ -7,39 +7,41 @@ public class Matrix {
         columnMatrix = new Node[col];
     }
 
-    public void printDense() {
-
+    public void printCompressed() {
+        System.out.println("[row] [col] [value]");
+        for(Node n : rowMatrix){
+            while (n != null) {
+                System.out.printf("%5s %5s %5s%n", n.rowIndex, n.columnIndex, n.data);
+                n = n.nextInRow;
+            }
+        }
     }
 
     public void print2D() {
-        //Just To Check Events Work Correctly
+        for(Node n : rowMatrix){
+            int last = 0;
+            if(n == null){
+                for(int i=0; i<columnMatrix.length; i++){
+                    System.out.printf("%4s", 0);
+                }
+            }
+            while (n != null) {
+                for(int i=last; i<n.columnIndex; i++){
+                    System.out.printf("%4s", 0);
+                }
+                last = n.columnIndex+1;
+                System.out.printf("%4s", n.data);
+                n = n.nextInRow;
+                if(last < columnMatrix.length && n == null){
+                    while(last < columnMatrix.length){
+                        System.out.printf("%4s", 0);
+                        last++;
+                    }
+                }
+            }
+            System.out.println();
+        }
 
-        System.out.println("----------------Row Wise-------------------");
-        for (int i = 0; i < rowMatrix.length; i++) {
-            if (rowMatrix[i] == null) {
-                System.out.println("0s line");
-            } else {
-                Node n = rowMatrix[i];
-                while (n != null) {
-                    System.out.print(n.data + ",");
-                    n = n.nextInRow;
-                }
-            }
-            System.out.println();
-        }
-        System.out.println("----------------Column Wise-------------------");
-        for (int i = 0; i < columnMatrix.length; i++) {
-            if (columnMatrix[i] == null) {
-                System.out.println("0s col");
-            } else {
-                Node n = columnMatrix[i];
-                while (n != null) {
-                    System.out.print(n.data + ",");
-                    n = n.nextInColumn;
-                }
-            }
-            System.out.println();
-        }
     }
 
     public void add(Node node) {
