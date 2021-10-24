@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+
 public class Matrix {
     Node[] rowMatrix;
     Node[] columnMatrix;
@@ -9,7 +11,7 @@ public class Matrix {
 
     public void printCompressed() {
         System.out.println("[row] [col] [value]");
-        for(Node n : rowMatrix){
+        for (Node n : rowMatrix) {
             while (n != null) {
                 System.out.printf("%5s %5s %5s%n", n.rowIndex, n.columnIndex, n.data);
                 n = n.nextInRow;
@@ -18,22 +20,22 @@ public class Matrix {
     }
 
     public void print2D() {
-        for(Node n : rowMatrix){
+        for (Node n : rowMatrix) {
             int last = 0;
-            if(n == null){
-                for(int i=0; i<columnMatrix.length; i++){
+            if (n == null) {
+                for (int i = 0; i < columnMatrix.length; i++) {
                     System.out.printf("%4s", 0);
                 }
             }
             while (n != null) {
-                for(int i=last; i<n.columnIndex; i++){
+                for (int i = last; i < n.columnIndex; i++) {
                     System.out.printf("%4s", 0);
                 }
-                last = n.columnIndex+1;
+                last = n.columnIndex + 1;
                 System.out.printf("%4s", n.data);
                 n = n.nextInRow;
-                if(last < columnMatrix.length && n == null){
-                    while(last < columnMatrix.length){
+                if (last < columnMatrix.length && n == null) {
+                    while (last < columnMatrix.length) {
                         System.out.printf("%4s", 0);
                         last++;
                     }
@@ -185,6 +187,53 @@ public class Matrix {
                     n = n.nextInRow;
                 }
             }
+        }
+    }
+
+    public void save_file(String path) {
+        StringBuilder[] lines = new StringBuilder[rowMatrix.length];
+        for (int i = 0; i < lines.length; i++) {
+            lines[i] = new StringBuilder("");
+        }
+        try {
+            int counter = 0;
+            for (Node n : rowMatrix) {
+                int last = 0;
+                if (n == null) {
+                    for (int i = 0; i < columnMatrix.length; i++) {
+                        lines[counter].append(0 + ",");
+                    }
+                }
+
+                while (n != null) {
+                    for (int i = last; i < n.columnIndex; i++) {
+                        lines[counter].append(0 + ",");
+                    }
+                    last = n.columnIndex + 1;
+                    lines[counter].append(n.data).append(",");
+                    n = n.nextInRow;
+                    if (last < columnMatrix.length && n == null) {
+                        while (last < columnMatrix.length) {
+                            lines[counter].append(0 + ",");
+                            last++;
+                        }
+                    }
+                }
+                counter++;
+            }
+        } catch (Exception ignored) {
+        }
+        try {
+            FileWriter writer = new FileWriter(path);
+            for (StringBuilder line : lines) {
+                line.deleteCharAt(line.length() - 1);
+                writer.write(line + "\n");
+            }
+            System.out.println("Data Successfully Saved!");
+            writer.flush();
+            writer.close();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
     }
 

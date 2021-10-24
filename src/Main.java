@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+    static String pathName;
     static int rows;
     static int columns;
     static Matrix matrix;
@@ -19,12 +20,12 @@ public class Main {
         while (!exit) {
             while (true) {
                 System.out.println("Please Enter Your Path (Format: M(rows,columns).csv): \n(Type \"0\" To Quit Program)");
-                String x = sc.nextLine();
-                if (x.equals("0")) {
+                pathName = sc.nextLine();
+                if (pathName.equals("0")) {
                     exit = true;
                     break;
                 }
-                if (ReadMenu(x)) {
+                if (ReadMenu(pathName)) {
                     System.out.println("Reading Successful!");
                     read = true;
                     break;
@@ -35,6 +36,7 @@ public class Main {
                 System.out.println("0: Insert\n1: Delete\n2: Search\n3: Update\n4: Print\n5: Save\n6: Back");
                 System.out.println("Your Input: ");
                 int input = sc.nextInt();
+                //------------------------------------------------------------------------------------------------------
                 if (input == 0) {
                     System.out.println("Enter Row, Column, Value :");
                     int row = sc.nextInt(), column = sc.nextInt(), value = sc.nextInt();
@@ -52,6 +54,7 @@ public class Main {
                             System.out.println(e.getMessage());
                         }
                     }
+                    //--------------------------------------------------------------------------------------------------
                 } else if (input == 1) {
                     System.out.println("Enter Row, Column:");
                     int row = sc.nextInt(), column = sc.nextInt();
@@ -61,6 +64,7 @@ public class Main {
                     } else {
                         System.out.println("There's No Value To Be Deleted!");
                     }
+                    //--------------------------------------------------------------------------------------------------
                 } else if (input == 2) {
                     System.out.println("Enter Value To Look For:");
                     int x = sc.nextInt();
@@ -69,6 +73,7 @@ public class Main {
                     } else {
                         matrix.search(x);
                     }
+                    //--------------------------------------------------------------------------------------------------
                 } else if (input == 3) {
                     System.out.println("Enter Row, Column, Value :");
                     int row = sc.nextInt(), column = sc.nextInt(), value = sc.nextInt();
@@ -77,6 +82,7 @@ public class Main {
                     } else {
                         System.out.println("The Value On (" + row + ", " + column + ") is 0!");
                     }
+                    //--------------------------------------------------------------------------------------------------
                 } else if (input == 4) {
                     System.out.println("Print Option:\n1: Print 2D\n2: Print Compressed\n3: Back");
                     int x = sc.nextInt();
@@ -86,8 +92,10 @@ public class Main {
                     if(x == 2){
                         matrix.printCompressed();
                     }
+                    //--------------------------------------------------------------------------------------------------
                 } else if (input == 5) {
-                    //save file
+                    matrix.save_file(pathName);
+                    //--------------------------------------------------------------------------------------------------
                 } else if(input == 6){
                     read = false;
                     sc.nextLine();
