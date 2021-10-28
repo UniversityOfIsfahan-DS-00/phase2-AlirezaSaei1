@@ -175,19 +175,16 @@ public class Matrix {
     }
 
     public void update(int row, int col, int value) {
-        for (Node matrix : rowMatrix) {
-            if (matrix != null) {
-                Node n = matrix;
-                while (n != null) {
-                    if (n.rowIndex == row && n.columnIndex == col) {
-                        n.data = value;
-                        System.out.println("Value Updated Successfully!");
-                        break;
-                    }
-                    n = n.nextInRow;
-                }
+        Node n = rowMatrix[row];
+        while (n != null) {
+            if (n.columnIndex == col) {
+                n.data = value;
+                System.out.println("Value Updated Successfully!");
+                break;
             }
+            n = n.nextInRow;
         }
+
     }
 
     public void save_file(String path) {
@@ -232,7 +229,7 @@ public class Matrix {
             System.out.println("Data Successfully Saved!");
             writer.flush();
             writer.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
